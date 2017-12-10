@@ -1,0 +1,80 @@
+﻿<Window x:Class="ImageProc.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:ImageProc"
+        mc:Ignorable="d"
+        Title="Házi Photoshop" Height="500" Width="800"
+        Loaded="Window_Loaded">
+    <Window.Resources>
+        <local:BitmapToBitmapSourceConverter x:Key="bitmapConverter"></local:BitmapToBitmapSourceConverter>
+    </Window.Resources>
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="20"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="30"/>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="11*"/>
+            <ColumnDefinition Width="25*"/>
+        </Grid.ColumnDefinitions>
+        <Menu Grid.Column="0" Grid.Row="0" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" Grid.ColumnSpan="2">
+            <MenuItem Header="Fájl" VerticalAlignment="Center" HorizontalAlignment="Center">
+                <MenuItem Header="Kép betöltése" Command="{Binding Path=FileBrowser}"/>
+                <MenuItem Header="Eredeti kép visszaállítása" Command="{Binding Path=RestoreImage}"/>
+            </MenuItem>
+            <MenuItem Header="Pont alapú műveletek" VerticalAlignment="Center" HorizontalAlignment="Center">
+                <MenuItem Header="Szürkeárnyalatos kép" Command="{Binding Path=Grayscale}"/>
+                <MenuItem Header="Invertálás" Command="{Binding Path=Invert}"/>
+                <MenuItem Header="Küszöbölés" Command="{Binding Path=Treshold}"/>
+                <MenuItem Header="Kontraszt nyújtás" Command="{Binding Path=ContrastStretch}"/>
+                <MenuItem Header="Logaritmikus" Command="{Binding Path=LogaritmicScale}"/>
+            </MenuItem>
+            <MenuItem Header="Maszk alapú műveletek" VerticalAlignment="Center" HorizontalAlignment="Center">
+                <MenuItem Header="Átlagoló szűrő" Command="{Binding Path=MeanFilter}"/>
+                <MenuItem Header="Gauss szűrő" Command="{Binding Path=GaussFilter}"/>
+                <MenuItem Header="Medián szűrő" Command="{Binding Path=MedianFilter}"/>
+            </MenuItem>
+            <MenuItem Header="Élek és sarokpontok" VerticalAlignment="Center" HorizontalAlignment="Center">
+                <MenuItem Header="Laplace szűrő" Command="{Binding Path=LaplaceFilter}"/>
+                <MenuItem Header="Sobel éldetektáló" Command="{Binding Path=SobelEdgeDetector}"/>
+                <MenuItem Header="Harris sarokdetektáló" Command="{Binding Path=Harris}"/>
+            </MenuItem>
+            <MenuItem Header="Hisztogram műveletek" VerticalAlignment="Center" HorizontalAlignment="Center">
+                <MenuItem Header="Hisztogram megjelenítése" Command="{Binding Path=CreateHistogram}"/>
+                <MenuItem Header="Hisztogram kiegyenlítés" Command="{Binding Path=HistogramEqualization}"/>
+
+            </MenuItem>
+        </Menu>
+        <Label Grid.Column="0" Grid.Row="2" Content="{Binding Path=ElapsedTimeMessage}" Grid.ColumnSpan="2"></Label>
+        <!--<StackPanel Name="buttonForIP" Grid.Column="0" Grid.Row="1">
+
+            <Label Content="Pont alapú műveletek" HorizontalAlignment="Center"></Label>
+            <Button Content="Szürkeárnyalatos kép" Command="{Binding Path=Greyscale}"></Button>
+            <Button Content="Invertálás" Command="{Binding Path=Invert}"></Button>
+            <Button Content="Küszöbölés" Command="{Binding Path=Treshold}"></Button>
+            <Button Content="Intenzitás nyújtás" Command="{Binding Path=ContrastStretch}"></Button>
+            <Button Content="Logaritmikus" Command="{Binding Path=LogaritmicScale}"></Button>
+
+            <Label Content="Maszk alapú műveletek" HorizontalAlignment="Center"></Label>
+
+            <Button Content="Átlagoló szűrő" Command="{Binding Path=MeanFilter}"></Button>
+            <Button Content="Gauss szűrő" Command="{Binding Path=GaussFilter}"></Button>
+            <Button Content="Medián szűrő" Command="{Binding Path=MedianFilter}"></Button>
+            <Button Content="Laplace szűrő" Command="{Binding Path=LaplaceFilter}"></Button>
+
+            <Button Content="Sobel éldetektáló" Command="{Binding Path=SobelEdgeDetector}"></Button>
+            <Button Content="Harris sarokdetektáló" Command="{Binding Path=Harris}"></Button>
+
+        </StackPanel>-->
+
+        <StackPanel Name="panelForImage" Grid.Column="0" Grid.Row="1" VerticalAlignment="Center" Grid.ColumnSpan="2" Margin="0,10,0,9">
+            <Image Height="400"  Grid.Column="1" Grid.Row="1" Source="{Binding Path=SourceImage, Converter={StaticResource bitmapConverter}}" HorizontalAlignment="Center" VerticalAlignment="Center" Stretch="Uniform">
+            </Image>
+
+        </StackPanel>
+
+    </Grid>
+</Window>

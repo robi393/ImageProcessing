@@ -1,0 +1,27 @@
+﻿<Window x:Class="ImageProc.Histogram"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:ImageProc"
+        mc:Ignorable="d"
+        Title="Histogram" Height="500" Width="400"
+        >
+    <Window.Resources>
+        <local:BitmapToBitmapSourceConverter x:Key="bitmapConverter"></local:BitmapToBitmapSourceConverter>
+    </Window.Resources>
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+
+        <Image Grid.Row="0" Source="{Binding Path=Gray, Converter={StaticResource bitmapConverter}}" HorizontalAlignment="Center" VerticalAlignment="Center" Stretch="Uniform"/>
+        <Image Grid.Row="1" Source="{Binding Path=Red, Converter={StaticResource bitmapConverter}}" HorizontalAlignment="Center" VerticalAlignment="Center" Stretch="Uniform"/>
+        <Image Grid.Row="2" Source="{Binding Path=Green, Converter={StaticResource bitmapConverter}}" HorizontalAlignment="Center" VerticalAlignment="Center" Stretch="Uniform"/>
+        <Image Grid.Row="3" Source="{Binding Path=Blue, Converter={StaticResource bitmapConverter}}" HorizontalAlignment="Center" VerticalAlignment="Center" Stretch="Uniform"/>
+
+    </Grid>
+</Window>
